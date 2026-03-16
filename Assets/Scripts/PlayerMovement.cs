@@ -23,17 +23,21 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+
+    public bool canMove;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!canMove) return;
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
@@ -51,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!canMove) return;
         MovePlayer();
     }
     private void MyInput()

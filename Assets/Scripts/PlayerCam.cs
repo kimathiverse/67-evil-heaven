@@ -11,17 +11,21 @@ public class PlayerCam : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    public bool canMoveCamera;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        canMoveCamera = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!canMoveCamera) return;
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
