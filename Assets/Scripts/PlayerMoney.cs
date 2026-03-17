@@ -21,4 +21,8 @@ public class PlayerMoney : MonoBehaviour
         money += amount;
         moneyText.text = "Money: " + money + "€";
     }
+    public void UpdateMoney()
+    {
+        moneyText.text = "Money: " + money + "€";
+    }
 }

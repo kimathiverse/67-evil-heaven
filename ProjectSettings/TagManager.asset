@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraPos
   - Interactable
+  - Dog
   layers:
   - Default
   - TransparentFX
