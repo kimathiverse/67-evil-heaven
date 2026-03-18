@@ -3,10 +3,12 @@ using UnityEngine;
 public class BloodDonation : MonoBehaviour
 {
     PlayerMovement playerMovement;
+    KarmaSystem karmaSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
     }
 
     // Update is called once per frame
@@ -16,9 +18,8 @@ public class BloodDonation : MonoBehaviour
     }
     public void Donate()
     {
-        //give karma
+        karmaSystem.GetKarma(10);
         //sound effect
-        Debug.Log("moi");
         playerMovement.SpeedDecrease();
     }
 }

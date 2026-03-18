@@ -3,11 +3,13 @@ using UnityEngine;
 public class CharityBox : MonoBehaviour
 {
     private PlayerMoney playerMoney;
+    private KarmaSystem karmaSystem;
     public float donationAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
+        karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class CharityBox : MonoBehaviour
         {
             playerMoney.money -= donationAmount;
             playerMoney.UpdateMoney();
-            //give karma
+            karmaSystem.GetKarma(5);
             // play sound
         }
         //else play error sound

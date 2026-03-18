@@ -51,7 +51,7 @@ public class ShopScript : MonoBehaviour
             GameObject newBone = Instantiate(boneObject, spawnPoint.position, itemRotation.rotation, inventory);
             newBone.SetActive(false); 
             playerMoney.money -= 20;
-            boneUI.SetActive(false);
+            //boneUI.SetActive(false);
             playerMoney.UpdateMoney();
         }
 

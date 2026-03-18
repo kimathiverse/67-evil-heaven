@@ -6,6 +6,7 @@ public class BoneScript : MonoBehaviour
     public Camera cam; // assign in Inspector
     public float rayDistance = 10f;
     private DogMovement dogMovement;
+    private PuppyMovement puppyMovement;
 
     void Start()
     {
@@ -25,6 +26,12 @@ public class BoneScript : MonoBehaviour
                     Debug.Log("moi");
                     dogMovement = hit.collider.gameObject.GetComponent<DogMovement>();
                     dogMovement.breeding = true;
+                    Destroy(gameObject);
+                }
+                if (hit.collider.CompareTag("Puppy"))
+                {
+                    puppyMovement = hit.collider.gameObject.GetComponent<PuppyMovement>();
+                    puppyMovement.breeding = true;
                     Destroy(gameObject);
                 }
 
