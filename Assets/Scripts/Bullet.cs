@@ -4,7 +4,14 @@ public class Bullet : MonoBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("MOI");
+        if (collision.gameObject.CompareTag("TaxMan"))
+        {
+            TaxManAI taxManAI;
+            taxManAI = collision.gameObject.GetComponent<TaxManAI>();
+
+            taxManAI.TakeDamage(30);
+            Debug.Log("taxman hit");
+        }
         Destroy(gameObject);
     }
 }

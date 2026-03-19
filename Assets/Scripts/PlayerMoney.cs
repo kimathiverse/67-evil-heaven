@@ -8,6 +8,7 @@ public class PlayerMoney : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        money = 0;
         moneyText.text = "Money: " + money + "€";
     }
 
@@ -19,10 +20,10 @@ public class PlayerMoney : MonoBehaviour
     public void GetMoney(float amount)
     {
         money += amount;
-        moneyText.text = "Money: " + money + "€";
+        UpdateMoney();
     }
     public void UpdateMoney()
     {
-        moneyText.text = "Money: " + money + "€";
+        //moneyText.text = "Money: " + money + "€";
     }
 }

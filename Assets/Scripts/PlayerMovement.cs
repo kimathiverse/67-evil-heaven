@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private float startFov;
     public float fovChange;
     private bool boosted;
-    private bool decreased;
+    public bool decreased;
     private Coroutine boostCoroutine;
     private Coroutine decreaseCoroutine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -181,7 +181,7 @@ IEnumerator BoostCountDown()
 
 IEnumerator DecreaseCountDown()
 {
-    yield return new WaitForSeconds(20);
+    yield return new WaitForSeconds(60);
 
     jumpForce += jumpDecrease;
     moveSpeed += speedDecrease;

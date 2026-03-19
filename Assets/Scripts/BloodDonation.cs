@@ -18,8 +18,12 @@ public class BloodDonation : MonoBehaviour
     }
     public void Donate()
     {
+        if(playerMovement.decreased == false)
+        {
         karmaSystem.GetKarma(10);
         //sound effect
         playerMovement.SpeedDecrease();
+        }
+
     }
 }

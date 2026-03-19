@@ -9,6 +9,9 @@ TagManager:
   - Dog
   - Puppy
   - Karma
+  - Hitbox
+  - PlayerBox
+  - TaxMan
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - whatIsGround
   - Water
   - UI
-  - 
+  - whatIsPlayer
   - 
   - 
   - 
