@@ -11,9 +11,8 @@ public class DogMovement : MonoBehaviour
     public float walkDistance = 3f;
     public float turnSpeed = 200f;
 
-    [Header("Breeding")]
-    public float breedMoveSpeed = 2f;
-    public float breedDistance = 1.5f;
+
+
     public GameObject puppyPrefab;
 
     private Rigidbody rb;
@@ -24,10 +23,13 @@ public class DogMovement : MonoBehaviour
     private float targetYRotation;
 
     public bool breeding = false;
-    private bool isBreedingActive = false;
-    private bool hasStartedBreeding = false;
 
-    private Transform targetMate;
+    public float breedDelay = 2f;
+    private bool isBreedingInProgress = false;
+    KarmaSystem karmaSystem;
+    public float karmaFrom;
+    public bool isDead = false;
+ 
 
     void Start()
     {
@@ -35,28 +37,24 @@ public class DogMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         startPosition = transform.position;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
     }
 
-    void FixedUpdate()
+void FixedUpdate()
+{
+    if (isDead) return;
+
+
+    if (isBreedingInProgress) return;
+
+    if (!breeding)
     {
-        if (!breeding)
-        {
-            if (!isTurning) MoveForward();
-            else Turn();
+        if (!isTurning) MoveForward();
+        else Turn();
 
-            UpdateAnimation();
-        }
-        else
-        {
-            if (targetMate == null)
-            {
-                targetMate = FindClosestMate();
-                if (targetMate == null) return;
-            }
-
-            BreedTowardsTarget();
-        }
+        UpdateAnimation();
     }
+}
 
     void MoveForward()
     {
@@ -90,106 +88,62 @@ public class DogMovement : MonoBehaviour
         animator.SetBool("Walking", !isTurning && rb.linearVelocity.magnitude > 0.1f);
     }
 
-    void BreedTowardsTarget()
-    {
-        Vector3 direction = (targetMate.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, targetMate.position);
+ 
 
-        // Slight random offset to prevent overlapping rigidbodies
-        if (distance < 0.5f)
-            direction += Random.insideUnitSphere * 0.1f;
+void SpawnPuppy()
+{
+    Vector3 spawnPos = transform.position + transform.forward * 1.5f;
+    Instantiate(puppyPrefab, spawnPos, Quaternion.identity);
+}
+    public void StartBreeding()
+{
+    if (isBreedingInProgress) return;
 
-        if (distance > breedDistance)
-        {
-            rb.MovePosition(transform.position + direction * breedMoveSpeed * Time.fixedDeltaTime);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), turnSpeed * Time.fixedDeltaTime);
-            animator.SetBool("Walking", true);
-        }
-        else
-        {
-            rb.linearVelocity = Vector3.zero;
-            animator.SetBool("Walking", false);
-            transform.rotation = Quaternion.LookRotation(direction);
+    breeding = true;
+    isBreedingInProgress = true;
 
-            if (!hasStartedBreeding)
-            {
-                hasStartedBreeding = true;
-                animator.SetBool("LookUp", true);
+    rb.linearVelocity = Vector3.zero; // stop movement
+    animator.SetBool("Walking", false);
+    animator.SetBool("LookUp", true);
 
-                // Only spawn puppy if mate is adult dog
-                if (targetMate.GetComponent<DogMovement>() != null)
-                    Invoke(nameof(SpawnPuppy), 1f);
+    StartCoroutine(BreedRoutine());
+}
+IEnumerator BreedRoutine()
+{
+    yield return new WaitForSeconds(breedDelay);
 
-                // Notify puppy mate if needed
-                PuppyMovement pup = targetMate.GetComponent<PuppyMovement>();
-                if (pup != null)
-                    pup.breeding = true;
+    SpawnPuppy();
+    karmaSystem.GetKarma(karmaFrom);
 
-                // End breeding act
-                Invoke(nameof(EndBreeding), 2f);
-            }
-        }
-    }
+    animator.SetBool("LookUp", false);
 
-    void SpawnPuppy()
-    {
-        if (puppyPrefab == null || targetMate == null) return;
+    breeding = false;
+    isBreedingInProgress = false;
+}
 
-        // Only one adult spawns puppy
-        if (GetInstanceID() < targetMate.GetInstanceID())
-        {
-            Vector3 spawnPos = (transform.position + targetMate.position) / 2f;
-            spawnPos.y += 0.1f; // small offset to avoid overlap
-            Instantiate(puppyPrefab, spawnPos, Quaternion.identity);
-        }
-    }
+public void Die()
+{
+    if (isDead) return;
 
-    Transform FindClosestMate()
-    {
-        GameObject[] dogs = GameObject.FindGameObjectsWithTag("Dog");
-        GameObject[] puppies = GameObject.FindGameObjectsWithTag("Puppy");
+    isDead = true;
 
-        Transform closest = null;
-        float minDistance = Mathf.Infinity;
+    // Stop movement
+    rb.linearVelocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
 
-        // Check adult dogs
-        foreach (GameObject dog in dogs)
-        {
-            if (dog.transform == transform) continue;
-            DogMovement other = dog.GetComponent<DogMovement>();
-            if (other == null || other.isBreedingActive) continue;
+    // Remove movement constraints so it can fall
+    rb.constraints = RigidbodyConstraints.None;
 
-            float dist = Vector3.Distance(transform.position, dog.transform.position);
-            if (dist < minDistance)
-            {
-                minDistance = dist;
-                closest = dog.transform;
-            }
-        }
+    // Optional: small push so it falls over
+    rb.AddTorque(transform.right * 5f, ForceMode.Impulse);
 
-        // Check puppies ready to breed
-        foreach (GameObject pup in puppies)
-        {
-            PuppyMovement puppy = pup.GetComponent<PuppyMovement>();
-            if (puppy == null || puppy.isDead || !puppy.isReadyToBreed) continue;
+    // Stop animations
+    animator.SetBool("Walking", false);
+    animator.SetBool("LookUp", false);
 
-            float dist = Vector3.Distance(transform.position, pup.transform.position);
-            if (dist < minDistance)
-            {
-                minDistance = dist;
-                closest = pup.transform;
-            }
-        }
+    // Optional: disable animator completely so physics takes over
+    animator.enabled = false;
+}
 
-        return closest;
-    }
-
-    void EndBreeding()
-    {
-        breeding = false;
-        isBreedingActive = false;
-        targetMate = null;
-        hasStartedBreeding = false;
-        animator.SetBool("LookUp", false);
-    }
+   
 }

@@ -216,6 +216,10 @@ PrefabInstance:
       value: 179.99998
       objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: f8e8f0a2ed22c46eaa0fda252d7877f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: f8e8f0a2ed22c46eaa0fda252d7877f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021
       objectReference: {fileID: 0}
@@ -279,7 +283,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 6
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -313,12 +317,13 @@ MonoBehaviour:
     m_Bits: 64
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 7
-  timeBetweenAttacks: 2
+  timeBetweenAttacks: 0.5
   sightRange: 20
-  attackRange: 1
+  attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
   health: 120
+  hitBox: {fileID: 2630352413992943962}
   money: {fileID: 1430348737867360193, guid: 8dd541061d900491d99e1b83941c7167, type: 3}
 --- !u!54 &5430801846211139637
 Rigidbody:
@@ -366,8 +371,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.90761566, y: 3.2145684, z: 0.3993721}
-  m_Center: {x: 0.0001296997, y: 1.1072844, z: -0.011118889}
+  m_Size: {x: 0.90761566, y: 2.7798753, z: 0.6629095}
+  m_Center: {x: 0.0001296997, y: 1.324631, z: -0.016671658}
 --- !u!4 &2087760734483416165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f8e8f0a2ed22c46eaa0fda252d7877f0, type: 3}

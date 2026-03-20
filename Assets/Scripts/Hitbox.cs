@@ -33,7 +33,7 @@ public class Hitbox : MonoBehaviour
             taxMan = gameObject.GetComponentInParent<Transform>();
             Vector3 kbDirection = (player.position - taxMan.position).normalized;
 
-            playerRb.AddForce(new Vector3(kbDirection.x * 10, kbDirection.y + 1, kbDirection.z * 10) * kbForce, ForceMode.Impulse);
+            playerRb.AddForce(new Vector3(kbDirection.x * 15, kbDirection.y +2f, kbDirection.z * 15) * kbForce, ForceMode.Impulse);
 
 
 

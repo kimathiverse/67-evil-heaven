@@ -8,8 +8,9 @@ public class PlayerMoney : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<TMP_Text>();
         money = 0;
-        moneyText.text = "Money: " + money + "€";
+        moneyText.text = money + "€";
     }
 
     // Update is called once per frame
@@ -24,6 +25,6 @@ public class PlayerMoney : MonoBehaviour
     }
     public void UpdateMoney()
     {
-        //moneyText.text = "Money: " + money + "€";
+        moneyText.text = money + "€";
     }
 }

@@ -5,6 +5,7 @@ public class CharityBox : MonoBehaviour
     private PlayerMoney playerMoney;
     private KarmaSystem karmaSystem;
     public float donationAmount;
+    public float karmaFromAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,7 +24,7 @@ public class CharityBox : MonoBehaviour
         {
             playerMoney.money -= donationAmount;
             playerMoney.UpdateMoney();
-            karmaSystem.GetKarma(5);
+            karmaSystem.GetKarma(karmaFromAmount);
             // play sound
         }
         //else play error sound

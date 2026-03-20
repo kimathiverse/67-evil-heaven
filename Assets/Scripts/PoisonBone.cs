@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class BoneScript : MonoBehaviour
+public class PoisonBone : MonoBehaviour
 {
-
-    public Camera cam; // assign in Inspector
+ public Camera cam; // assign in Inspector
     public float rayDistance = 10f;
     private DogMovement dogMovement;
     private PuppyMovement puppyMovement;
@@ -25,7 +24,7 @@ public class BoneScript : MonoBehaviour
                 {
                     Debug.Log("moi");
                     dogMovement = hit.collider.gameObject.GetComponent<DogMovement>();
-                    dogMovement.StartBreeding();
+                    dogMovement.Die();
                     Destroy(gameObject);
                 }
 

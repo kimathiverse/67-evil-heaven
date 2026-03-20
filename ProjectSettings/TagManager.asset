@@ -12,6 +12,7 @@ TagManager:
   - Hitbox
   - PlayerBox
   - TaxMan
+  - MoneyText
   layers:
   - Default
   - TransparentFX

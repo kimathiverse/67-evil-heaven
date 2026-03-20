@@ -4,6 +4,7 @@ public class BloodDonation : MonoBehaviour
 {
     PlayerMovement playerMovement;
     KarmaSystem karmaSystem;
+    public float karmaFrom;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +21,7 @@ public class BloodDonation : MonoBehaviour
     {
         if(playerMovement.decreased == false)
         {
-        karmaSystem.GetKarma(10);
+        karmaSystem.GetKarma(karmaFrom);
         //sound effect
         playerMovement.SpeedDecrease();
         }

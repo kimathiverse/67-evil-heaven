@@ -1,26 +1,31 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class KarmaSystem : MonoBehaviour
 {
     public float karma;
     public Slider karmaSlider;
+    public bool gameEnded;
+    public GameObject hellObject;
+    public GameObject heavenObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         karma = 100f;
         karmaSlider.value = 0.5f;
         karmaSlider.maxValue = 1f;
+        gameEnded = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (karma >= 200)
+        if (karma >= 200 && !gameEnded)
         {
             GetToHeaven();
         }
-        else if (karma <= 0)
+        else if (karma <= 0 && !gameEnded)
         {
             GetToHell();
         }
@@ -38,10 +43,27 @@ public class KarmaSystem : MonoBehaviour
     public void GetToHeaven()
     {
         Debug.Log("heaven");
+        heavenObject.SetActive(true);
+        Time.timeScale = 0;
+        gameEnded = true;
+                Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
     }
     public void GetToHell()
     {
         Debug.Log("Hell");
+        hellObject.SetActive(true);
+        Time.timeScale = 0;
+        gameEnded = true;
+                Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
     }
 
 }

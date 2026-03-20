@@ -18,17 +18,18 @@ public class TaxManAI : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
     public float health;
-    private GameObject hitBox;
+    public GameObject hitBox;
     Animator animator;
     public GameObject money;
+    KarmaSystem karmaSystem;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
-        hitBox = GameObject.FindGameObjectWithTag("Hitbox");
         animator = GetComponent<Animator>();
         animator.SetBool("Walking",true);
+        karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
     }
     void Update()
     {
@@ -103,6 +104,8 @@ public class TaxManAI : MonoBehaviour
     public void DestroyEnemy()
     {
         Instantiate(money, gameObject.transform.position, Quaternion.identity);
+
+        karmaSystem.LoseKarma(5f);
 
         Destroy(gameObject);
     }

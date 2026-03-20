@@ -8,7 +8,7 @@ public class ShopScript : MonoBehaviour
     private PlayerCam playerCam;
 
     public GameObject boneObject;
-    public GameObject boneUI;
+    
     public Transform inventory;
     public Transform spawnPoint;
     public Transform itemRotation;
