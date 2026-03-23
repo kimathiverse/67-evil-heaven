@@ -179,5 +179,5 @@ MonoBehaviour:
   puppyPrefab: {fileID: 2946005381224105562}
   breeding: 0
   breedDelay: 2
-  karmaFrom: 0
+  karmaFrom: 15
   isDead: 0

@@ -186,3 +186,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fb5ad5b39ca455c926428cb4aea608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloodDonation
+  karmaFrom: 10

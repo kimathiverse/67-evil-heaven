@@ -22,6 +22,7 @@ public class TaxManAI : MonoBehaviour
     Animator animator;
     public GameObject money;
     KarmaSystem karmaSystem;
+    PlayerMoney playerMoney;
 
     void Awake()
     {
@@ -30,6 +31,7 @@ public class TaxManAI : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetBool("Walking",true);
         karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
+        playerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
     }
     void Update()
     {
@@ -103,9 +105,9 @@ public class TaxManAI : MonoBehaviour
     }
     public void DestroyEnemy()
     {
-        Instantiate(money, gameObject.transform.position, Quaternion.identity);
+        playerMoney.GetMoney(10f);
 
-        karmaSystem.LoseKarma(5f);
+        karmaSystem.LoseKarma(4f);
 
         Destroy(gameObject);
     }

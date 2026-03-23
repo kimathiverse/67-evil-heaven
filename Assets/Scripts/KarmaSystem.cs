@@ -9,6 +9,8 @@ public class KarmaSystem : MonoBehaviour
     public bool gameEnded;
     public GameObject hellObject;
     public GameObject heavenObject;
+    public GameObject moneyObject;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +18,7 @@ public class KarmaSystem : MonoBehaviour
         karmaSlider.value = 0.5f;
         karmaSlider.maxValue = 1f;
         gameEnded = false;
+      
     }
 
     // Update is called once per frame
@@ -46,8 +49,9 @@ public class KarmaSystem : MonoBehaviour
         heavenObject.SetActive(true);
         Time.timeScale = 0;
         gameEnded = true;
-                Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        moneyObject.SetActive(false);
 
 
     }
@@ -57,8 +61,9 @@ public class KarmaSystem : MonoBehaviour
         hellObject.SetActive(true);
         Time.timeScale = 0;
         gameEnded = true;
-                Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        moneyObject.SetActive(false);
     }
     public void BackToMenu()
     {

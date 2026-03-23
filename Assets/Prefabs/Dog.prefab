@@ -142,10 +142,11 @@ MonoBehaviour:
   maxSpeed: 10
   walkDistance: 3
   turnSpeed: 70
-  breedMoveSpeed: 2
-  breedDistance: 0.7
   puppyPrefab: {fileID: 2946005381224105562, guid: 93fde7dda9923499a8d362c9a4e532bb, type: 3}
   breeding: 0
+  breedDelay: 2
+  karmaFrom: 15
+  isDead: 0
 --- !u!95 &3214381287661962095
 Animator:
   serializedVersion: 7
