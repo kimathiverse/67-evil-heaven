@@ -10,6 +10,7 @@ public class KarmaSystem : MonoBehaviour
     public GameObject hellObject;
     public GameObject heavenObject;
     public GameObject moneyObject;
+    public GameObject hpObject;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,9 +50,10 @@ public class KarmaSystem : MonoBehaviour
         heavenObject.SetActive(true);
         Time.timeScale = 0;
         gameEnded = true;
-                Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         moneyObject.SetActive(false);
+        hpObject.SetActive(true);
 
 
     }
@@ -64,6 +66,7 @@ public class KarmaSystem : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         moneyObject.SetActive(false);
+        hpObject.SetActive(false);
     }
     public void BackToMenu()
     {

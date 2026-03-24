@@ -172,12 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2cade376acf4fa69b2e9ebd1dba105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DogMovement
-  moveForce: 10
-  maxSpeed: 3
-  walkDistance: 3
+  moveForce: 15
+  maxSpeed: 10
+  walkDistance: 2.5
   turnSpeed: 200
   puppyPrefab: {fileID: 2946005381224105562}
   breeding: 0
   breedDelay: 2
-  karmaFrom: 15
+  karmaFrom: 25
   isDead: 0

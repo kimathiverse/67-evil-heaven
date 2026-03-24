@@ -46,11 +46,11 @@ public class EvilShop : MonoBehaviour
     }
     public void BuyBone()
     {
-       if(playerMoney.money >= 20)
+       if(playerMoney.money >= 25)
         {
             GameObject newBone = Instantiate(boneObject, spawnPoint.position, itemRotation.rotation, inventory);
             newBone.SetActive(false); 
-            playerMoney.money -= 20;
+            playerMoney.money -= 25;
             //boneUI.SetActive(false);
             playerMoney.UpdateMoney();
         }

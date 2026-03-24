@@ -1,46 +1,60 @@
+using System.Collections;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
     public AudioSource audioSource;
-
     public AudioClip normalMusic;
     public AudioClip lowKarmaMusic;
+    public float fadeSpeed = 0.5f;
 
-    KarmaSystem karmaSystem;
-
-    private AudioClip currentClip;
+    private KarmaSystem karmaSystem;
+    private AudioClip targetClip;
+    private bool isSwitching = false;
 
     void Start()
     {
         karmaSystem = GameObject.FindGameObjectWithTag("Karma").GetComponent<KarmaSystem>();
-        UpdateMusic();
+        
+        // Start a loop that checks every second instead of every frame
+        InvokeRepeating(nameof(CheckMusic), 0f, 1f);
     }
 
-    void Update()
+    void CheckMusic()
     {
-        UpdateMusic();
+        if (isSwitching) return;
+
+        AudioClip nextClip = (karmaSystem.karma <= 50f) ? lowKarmaMusic : normalMusic;
+
+        if (audioSource.clip != nextClip)
+        {
+            StartCoroutine(CrossfadeMusic(nextClip));
+        }
     }
 
-    void UpdateMusic()
+    IEnumerator CrossfadeMusic(AudioClip newClip)
     {
-        AudioClip targetClip;
+        isSwitching = true;
+        float startVolume = audioSource.volume;
 
-        if (karmaSystem.karma <= 50f)
+        // Fade Out
+        while (audioSource.volume > 0)
         {
-            targetClip = lowKarmaMusic;
-        }
-        else
-        {
-            targetClip = normalMusic;
+            audioSource.volume -= startVolume * Time.deltaTime / fadeSpeed;
+            yield return null;
         }
 
-        // Only switch if different (prevents restarting every frame)
-        if (currentClip != targetClip)
+        audioSource.Stop();
+        audioSource.clip = newClip;
+        audioSource.Play();
+
+        // Fade In
+        while (audioSource.volume < startVolume)
         {
-            currentClip = targetClip;
-            audioSource.clip = currentClip;
-            audioSource.Play();
+            audioSource.volume += startVolume * Time.deltaTime / fadeSpeed;
+            yield return null;
         }
+
+        isSwitching = false;
     }
 }
