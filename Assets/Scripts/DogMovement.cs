@@ -141,7 +141,7 @@ public void Die()
     animator.SetBool("Walking", false);
     animator.SetBool("LookUp", false);
 
-    karmaSystem.LoseKarma(10f);
+    karmaSystem.LoseKarma(15f);
 
     // Optional: disable animator completely so physics takes over
     animator.enabled = false;

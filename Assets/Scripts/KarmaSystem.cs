@@ -53,7 +53,7 @@ public class KarmaSystem : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         moneyObject.SetActive(false);
-        hpObject.SetActive(true);
+        hpObject.SetActive(false);
 
 
     }

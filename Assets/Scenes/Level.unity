@@ -419,6 +419,10 @@ PrefabInstance:
       value: KarmaManager
       objectReference: {fileID: 0}
     - target: {fileID: 8897208434996950570, guid: 8fc7d82b09f8a4be985bdefdfdd5147c, type: 3}
+      propertyPath: hpObject
+      value: 
+      objectReference: {fileID: 629103629}
+    - target: {fileID: 8897208434996950570, guid: 8fc7d82b09f8a4be985bdefdfdd5147c, type: 3}
       propertyPath: hellObject
       value: 
       objectReference: {fileID: 1844159882}
@@ -478,6 +482,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2534964839176971238, guid: 93de3ab31d3aa49ff9ee266b45ca7bda, type: 3}
+    - target: {fileID: 2746941955190707963, guid: 921fae5c0e1544dd28d8c6679abcec99, type: 3}
+      propertyPath: sensX
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746941955190707963, guid: 921fae5c0e1544dd28d8c6679abcec99, type: 3}
+      propertyPath: sensY
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2746941955190707963, guid: 921fae5c0e1544dd28d8c6679abcec99, type: 3}
       propertyPath: orientation
       value: 
@@ -1788,7 +1800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4323318013135859622, guid: 923ac8097d91c4c0b928355aeb31c2c9, type: 3}
       propertyPath: karmaFrom
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5760111825553504009, guid: 923ac8097d91c4c0b928355aeb31c2c9, type: 3}
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2196,35 +2208,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 257.8947
+      value: 257.89478
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 101.5753
+      value: 101.57532
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 386
+      value: -604
       objectReference: {fileID: 0}
     - target: {fileID: 1222378473327098676, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -197
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 1418716226074222191, guid: bbc3fa1f8da7f4f57b69d6a240b0dcc9, type: 3}
       propertyPath: m_Type
@@ -4090,6 +4102,7 @@ MonoBehaviour:
   audioSource: {fileID: 1517159782}
   normalMusic: {fileID: 8300000, guid: 590997ffc28ea4ce7bc0dee9898c30b8, type: 3}
   lowKarmaMusic: {fileID: 8300000, guid: 36080cdb788424088bb8657d616c9037, type: 3}
+  fadeSpeed: 0.5
 --- !u!1001 &1522230460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5539,15 +5552,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917865696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -510.1746}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.986954, y: 1.986954, z: 1.986954}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1991102543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -99.05258, y: -34.787643}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -230, y: 16.212357}
   m_SizeDelta: {x: 92.94043, y: 85.378784}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1917865698
